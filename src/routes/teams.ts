@@ -24,7 +24,7 @@ export async function listTeams(req: Request, res: Response) {
 export async function createTeamHandler(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   const { name, description } = req.body;
 
@@ -66,7 +66,7 @@ export async function getTeam(req: Request, res: Response) {
 export async function updateteamHandler(
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) {
   const { slug } = req.params;
   const team = await await getDatabase()?.getTeam(slug);
@@ -85,7 +85,7 @@ export async function updateteamHandler(
 
   const values = [
     typeof name === 'string' && name ? name : null,
-    typeof name === 'string' && name ? slugify(name).toLowerCase() : null,
+    typeof name === 'string' && name ? slugify(name, { lower: false }) : null,
     typeof description === 'string' && description ? description : null,
   ];
 
@@ -93,7 +93,7 @@ export async function updateteamHandler(
     'teams',
     team.id,
     fields,
-    values,
+    values
   );
 
   if (!updated) {
