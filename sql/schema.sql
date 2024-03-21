@@ -16,8 +16,8 @@ CREATE TABLE public.teams (
 CREATE TABLE public.games (
   id serial primary key,
   date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  home integer NOT NULL REFERENCES teams(id),
-  away integer NOT NULL REFERENCES teams(id),
+  home integer NOT NULL REFERENCES teams(id) ON DELETE CASCADE,
+  away integer NOT NULL REFERENCES teams(id) ON DELETE CASCADE,
   home_score integer NOT NULL check (home_score >= 0),
   away_score integer NOT NULL check (away_score >= 0)
 );
